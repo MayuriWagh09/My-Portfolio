@@ -1,544 +1,336 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="AMR Nexus — a futuristic single‑page site on Antimicrobial Resistance (AMR): diagnostics, remedial measures, case analysis, and curated research links." />
-  <title>AMR Nexus • Futuristic BioTech</title>
-  <style>
-    /* -------------------- CSS RESET / BASE -------------------- */
-    *,*::before,*::after{box-sizing:border-box}
-    html,body{height:100%}
-    body{margin:0;line-height:1.6;-webkit-font-smoothing:antialiased;}
-    img,svg,canvas{max-width:100%;display:block}
-    :root{
-      --bg-0:#0a0f1f; --bg-1:#0f1329; --panel:#0f172aCC; --glass:rgba(15,23,42,.6);
-      --text:#E5F4FF; --muted:#a5b4fc; --accent:#7cf9d2; --accent-2:#a78bfa; --danger:#ff6b6b;
-      --shadow:0 10px 30px rgba(0,0,0,.5);
-      --radius:18px;
-    }
-    [data-theme="light"]{
-      --bg-0:#f6f8ff; --bg-1:#eaefff; --panel:#ffffffE6; --glass:rgba(255,255,255,.7);
-      --text:#091123; --muted:#4f46e5; --accent:#0ea5e9; --accent-2:#8b5cf6; --danger:#ef4444;
-      --shadow:0 10px 30px rgba(0,0,0,.1);
-    }
-    body{
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
-      color:var(--text); background:radial-gradient(1200px 600px at 80% -10%,#2b2d55 0%, transparent 60%),
-      radial-gradient(900px 500px at -10% 10%, #1b1d3a 0%, transparent 60%),
-      linear-gradient(180deg, var(--bg-0), var(--bg-1));
-      overflow-x:hidden;
-    }
-    a{color:var(--accent)} a:hover{opacity:.9}
-    .container{width:min(1200px,92vw);margin-inline:auto}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMR - The Silent Pandemic</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
 
-    /* -------------------- HEADER -------------------- */
-    header{
-      position:sticky; top:0; z-index:50; backdrop-filter:saturate(160%) blur(8px);
-      background:linear-gradient(180deg, var(--glass), transparent); border-bottom:1px solid rgba(255,255,255,.06);
-    }
-    .nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0}
-    .brand{display:flex;align-items:center;gap:10px; font-weight:800; letter-spacing:.4px}
-    .brand .logo{width:34px;height:34px;background:
-      conic-gradient(from 220deg, var(--accent), var(--accent-2), #66ccff, var(--accent));
-      border-radius:12px; box-shadow:0 0 30px rgba(124,249,210,.35)}
-    nav ul{display:flex;gap:14px;flex-wrap:wrap;list-style:none;margin:0;padding:0}
-    nav a{display:inline-block;padding:8px 12px;border-radius:999px; text-decoration:none; color:var(--text);opacity:.88;border:1px solid rgba(255,255,255,.07)}
-    nav a.active, nav a:focus-visible{outline:none; border-color:var(--accent); box-shadow:0 0 0 2px rgba(124,249,210,.2)}
-    .actions{display:flex;gap:10px;align-items:center}
-    .btn{cursor:pointer;border:1px solid rgba(255,255,255,.1);background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-      color:var(--text); padding:8px 12px;border-radius:10px; transition:.2s transform}
-    .btn:hover{transform:translateY(-1px)}
-    .btn.primary{border-color:transparent;background:
-      linear-gradient(180deg, rgba(255,255,255,.1), rgba(255,255,255,.02)),
-      linear-gradient(90deg, var(--accent), var(--accent-2)); color:#08121c; font-weight:700}
-
-    /* -------------------- HERO -------------------- */
-    .hero{position:relative; padding:80px 0 40px 0}
-    .grid-hero{display:grid; grid-template-columns:1.1fr .9fr; gap:36px; align-items:center}
-    .pill{display:inline-flex; gap:8px; align-items:center; border:1px solid rgba(255,255,255,.12); padding:6px 10px;border-radius:999px; font-size:.9rem; opacity:.9}
-    .headline{font-size:clamp(32px,6vw,64px); line-height:1.05; margin:10px 0}
-    .sub{font-size:1.1rem; opacity:.9}
-    .neon{color:var(--accent)}
-    .panel{background:var(--panel); border:1px solid rgba(255,255,255,.08); border-radius:var(--radius); box-shadow:var(--shadow)}
-    .panel.pad{padding:22px}
-    .kpi{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:18px}
-    .kpi .box{background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); text-align:center; padding:14px; border-radius:14px; border:1px solid rgba(255,255,255,.06)}
-    .kpi .box b{font-size:1.2rem}
-
-    /* -------------------- SECTIONS -------------------- */
-    section{scroll-margin-top:90px; padding:64px 0}
-    .section-title{font-size:clamp(22px,4vw,36px); margin:0 0 6px}
-    .section-kicker{opacity:.7; margin-bottom:22px}
-
-    /* Diagnostics grid */
-    .toolbar{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:18px 0}
-    .input{flex:1; min-width:240px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); color:var(--text); border-radius:10px; padding:10px 12px}
-    .cards{display:grid; grid-template-columns:repeat(3,1fr); gap:18px}
-    @media (max-width:980px){.grid-hero{grid-template-columns:1fr}.cards{grid-template-columns:repeat(2,1fr)}}
-    @media (max-width:620px){.cards{grid-template-columns:1fr}}
-    .card{position:relative; overflow:hidden}
-    .card::after{content:""; position:absolute; inset:-2px; border-radius:inherit; padding:1px; background:linear-gradient(110deg, transparent, rgba(124,249,210,.35) 35%, transparent 60%); -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite:xor; mask-composite:exclude}
-    .card h3{margin:0 0 6px}
-    .card .tag{display:inline-flex; gap:6px; align-items:center;opacity:.9;background:rgba(124,249,210,.12); border:1px solid rgba(124,249,210,.28); color:var(--accent); padding:4px 8px; border-radius:999px; font-size:.8rem; font-weight:600}
-    details{border-top:1px dashed rgba(255,255,255,.12); margin-top:10px; padding-top:10px}
-
-    /* Case area */
-    .timeline{display:grid; gap:12px; margin:16px 0}
-    .tl-item{display:grid; grid-template-columns:120px 1fr; gap:12px; align-items:start}
-    .tl-item time{opacity:.7}
-    canvas.chart{width:100%; height:280px; background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01)); border:1px solid rgba(255,255,255,.08); border-radius:12px}
-
-    /* Papers list */
-    .papers{display:grid; gap:14px}
-    .paper{display:grid; gap:6px; padding:14px; border-radius:14px; background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.08)}
-    .paper .meta{font-size:.9rem; opacity:.8}
-
-    /* Footer */
-    footer{padding:48px 0; border-top:1px solid rgba(255,255,255,.08); background:linear-gradient(0deg, var(--glass), transparent)}
-
-    /* Floating UI */
-    #toTop{position:fixed; bottom:22px; right:22px; z-index:60; display:none}
-
-    /* Reduced motion */
-    @media (prefers-reduced-motion:reduce){
-      .float, .softpulse {animation:none!important}
-    }
-  </style>
 </head>
 <body>
-  <canvas id="bg" aria-hidden="true"></canvas>
-  <header>
-    <div class="container nav">
-      <div class="brand"><div class="logo" aria-hidden="true"></div><span>AMR Nexus</span></div>
-      <nav aria-label="Primary">
-        <ul>
-          <li><a href="#home" class="active">Home</a></li>
-          <li><a href="#diagnostics">Diagnostic Methods</a></li>
-          <li><a href="#remedies">Remedial Measures</a></li>
-          <li><a href="#cases">Case Analysis</a></li>
-          <li><a href="#papers">Research Links</a></li>
-        </ul>
-      </nav>
-      <div class="actions">
-        <button class="btn" id="themeBtn" title="Toggle theme">🌗</button>
-        <a class="btn primary" href="#papers">Explore</a>
-      </div>
-    </div>
-  </header>
+    <!-- Animated Grid Background -->
+    <div class="grid-bg"></div>
+    <div class="gradient-overlay"></div>
+    <div class="scanlines"></div>
 
-  <main>
-    <!-- -------------------- HERO -------------------- -->
-    <section id="home" class="hero">
-      <div class="container grid-hero">
-        <div>
-          <span class="pill">Topic • <b class="neon">Antimicrobial Resistance (AMR)</b></span>
-          <h1 class="headline">BioTech, but <span class="neon">sujfvwsvfujv</span>. Track, detect & outsmart resistance.</h1>
-          <p class="sub">AMR occurs when microbes evolve to evade our drugs. This site introduces modern diagnostics, practical counter‑measures, a realistic case walkthrough, and curated papers to dive deeper. Content is original and written for learning—not medical advice.</p>
-          <div class="kpi">
-            <div class="box"><b>Rapid ID</b><div>Minutes with MALDI‑TOF / PCR</div></div>
-            <div class="box"><b>Stewardship</b><div>AWaRe‑guided prescribing</div></div>
-            <div class="box"><b>One Health</b><div>Human • Animal • Environment</div></div>
-          </div>
+    <!-- Animated Shapes -->
+    <div class="shapes-container">
+        <div class="shape shape-circle"></div>
+        <div class="shape shape-triangle"></div>
+        <div class="shape shape-square"></div>
+    </div>
+
+    <!-- Floating Particles -->
+    <div id="particles"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="logo-link">
+                <svg class="logo-svg" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#FF5E00;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#00B2FF;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <polygon points="20,2 38,14 38,26 20,38 2,26 2,14" fill="none" stroke="url(#logoGradient)" stroke-width="2"/>
+                    <polygon points="20,8 32,16 32,24 20,32 8,24 8,16" fill="url(#logoGradient)" opacity="0.3"/>
+                    <circle cx="20" cy="20" r="3" fill="url(#logoGradient)"/>
+                </svg>
+                <!-- NEW LOGO STRUCTURE -->
+                <div class="logo-text-container">
+                    <span class="">AMR</span>
+                    <span class="">Awareness</span>
+                </div>
+            </a>
+            
+            <!-- NEW SEPARATOR -->
+            <div class="nav-separator"></div>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#overview" class="nav-link">Overview</a></li>
+                <li><a href="#diagnostic-methods" class="nav-link">Diagnostics</a></li>
+                <li><a href="#remedial-measures" class="nav-link">Measures</a></li>
+                <li><a href="#case-analysis" class="nav-link">Cases</a></li>
+                <li><a href="#research-papers" class="nav-link">Research</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
-        <div class="panel pad" aria-label="AMR data sketch">
-          <svg viewBox="0 0 560 380" role="img" aria-labelledby="dnaTitle dnaDesc">
-            <title id="dnaTitle">AMR Futuristic Visualization</title>
-            <desc id="dnaDesc">DNA helix lines with nodes representing resistance genes and MIC trends.</desc>
-            <defs>
-              <linearGradient id="g1" x1="0" x2="1">
-                <stop offset="0" stop-color="var(--accent)"/>
-                <stop offset="1" stop-color="var(--accent-2)"/>
-              </linearGradient>
-              <filter id="glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-            </defs>
-            <rect x="0" y="0" width="560" height="380" rx="16" fill="url(#g1)" opacity=".05"/>
-            <g stroke="url(#g1)" opacity=".95" filter="url(#glow)">
-              <!-- stylized helix -->
-              <path d="M20,60 C140,160 420,-40 540,60" fill="none" stroke-width="2"/>
-              <path d="M20,320 C140,220 420,420 540,320" fill="none" stroke-width="2"/>
-              <!-- rungs -->
-              <g opacity=".7">
-                <path d="M60,190 l440,0" stroke-width="1"/>
-                <path d="M120,140 l320,0" stroke-width="1"/>
-                <path d="M160,240 l280,0" stroke-width="1"/>
-                <path d="M80,100 l360,0" stroke-width="1"/>
-                <path d="M100,280 l360,0" stroke-width="1"/>
-              </g>
-            </g>
-            <!-- nodes -->
-            <g fill="url(#g1)" opacity=".9">
-              <circle cx="80" cy="100" r="4"/>
-              <circle cx="260" cy="140" r="5"/>
-              <circle cx="420" cy="240" r="4"/>
-              <circle cx="500" cy="190" r="5"/>
-              <circle cx="360" cy="280" r="4"/>
-            </g>
-            <!-- tiny legend -->
-            <g fill="currentColor" opacity=".8">
-              <text x="20" y="360" font-size="12">MIC↓ responsive • MIC↑ resistant</text>
-            </g>
-          </svg>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="text-rotator">
+                <div class="text-set active">
+                    <h1 class="typewriter-text">Antimicrobial Resistance</h1>
+                    <p class="subtitle">Understanding the silent pandemic threatening global health.</p>
+                </div>
+                <div class="text-set">
+                    <h1 class="typewriter-text">The Need For Action</h1>
+                    <p class="subtitle">How resistance develops and why we must act now.</p>
+                </div>
+                <div class="text-set">
+                    <h1 class="typewriter-text">Global Solutions</h1>
+                    <p class="subtitle">Exploring research, innovation, and policy to combat AMR.</p>
+                </div>
+            </div>
         </div>
-      </div>
+        <div class="cta-container">
+            <a href="#overview" class="cta-button cta-primary">Get Started</a>
+            <a href="#contact" class="cta-button cta-secondary">Get Involved</a>
+        </div>
     </section>
 
-    <!-- -------------------- DIAGNOSTIC METHODS -------------------- -->
-    <section id="diagnostics">
-      <div class="container">
-        <p class="section-kicker">Clinical & Genomic</p>
+    <!-- Overview Section (formerly About) -->
+    <section class="about" id="overview">
+        <h2 class="section-title">Overview of AMR</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <h2>Confronting a Global Threat</h2>
+                <p>Antimicrobial Resistance (AMR) occurs when microbes like bacteria, viruses, and fungi evolve to resist the drugs designed to kill them. This makes common infections harder to treat, increasing the risk of disease spread, severe illness, and death.</p>
+                <p>Considered a "silent pandemic," AMR threatens to undermine modern medicine. Procedures like surgery, chemotherapy, and organ transplants become far more dangerous without effective antibiotics to prevent and treat infections.</p>
+                <p>This platform is dedicated to raising awareness, providing reliable data, and fostering collaboration among researchers, policymakers, healthcare professionals, and the public in the global fight against AMR.</p>
+            </div>
+            <div class="about-visual">
+                <div class="about-graphic"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Diagnostic Methods Section (formerly Features) -->
+    <section class="features" id="diagnostic-methods">
         <h2 class="section-title">Diagnostic Methods</h2>
-        <div class="toolbar">
-          <input id="diagSearch" class="input" placeholder="Filter methods (e.g., MALDI, PCR, WGS, MIC)…" aria-label="Filter diagnostic methods" />
-          <button class="btn" id="expandAll">Expand all</button>
-          <button class="btn" id="collapseAll">Collapse all</button>
+        <div class="features-container">
+            <div class="feature-tabs">
+                <div class="tab-item active" data-tab="phenotypic">
+                    <span class="tab-icon">🔬</span>
+                    <span>Phenotypic Methods</span>
+                </div>
+                <div class="tab-item" data-tab="genotypic">
+                    <span class="tab-icon">🧬</span>
+                    <span>Genotypic Methods</span>
+                </div>
+                <div class="tab-item" data-tab="poc">
+                    <span class="tab-icon">⏱️</span>
+                    <span>Point-of-Care (POC)</span>
+                </div>
+                <div class="tab-item" data-tab="biomarkers">
+                    <span class="tab-icon">🧪</span>
+                    <span>Host Biomarkers</span>
+                </div>
+            </div>
+            <div class="feature-content">
+                <div class="content-panel active" id="phenotypic">
+                    <h3>Phenotypic Methods</h3>
+                    <p>These traditional methods assess how a microbe responds to an antimicrobial agent by observing its growth. They are the gold standard for determining susceptibility but can be slow, often taking 24-48 hours for results.</p>
+                    <ul class="feature-list">
+                        <li>Broth Dilution and Disk Diffusion</li>
+                        <li>Determine Minimum Inhibitory Concentration (MIC)</li>
+                        <li>Reliable and widely established</li>
+                        <li>Slower turnaround time</li>
+                    </ul>
+                </div>
+                <div class="content-panel" id="genotypic">
+                    <h3>Genotypic Methods</h3>
+                    <p>These molecular techniques detect specific resistance genes or mutations within a microbe's DNA. They are significantly faster than phenotypic methods and can provide results in a matter of hours.</p>
+                    <ul class="feature-list">
+                        <li>Polymerase Chain Reaction (PCR)</li>
+                        <li>Whole Genome Sequencing (WGS)</li>
+                        <li>Rapid detection of known resistance markers</li>
+                        <li>Cannot detect novel resistance mechanisms</li>
+                    </ul>
+                </div>
+                <div class="content-panel" id="poc">
+                    <h3>Point-of-Care (POC) Testing</h3>
+                    <p>Point-of-Care diagnostics provide rapid results directly at the site of patient care, such as a doctor's office or clinic. This enables immediate, informed treatment decisions, reducing the misuse of antibiotics.</p>
+                    <ul class="feature-list">
+                        <li>Results typically in under 30 minutes</li>
+                        <li>Crucial for outpatient and remote settings</li>
+                        <li>Helps distinguish between viral and bacterial infections</li>
+                        <li>A key tool for antimicrobial stewardship</li>
+                    </ul>
+                </div>
+                <div class="content-panel" id="biomarkers">
+                    <h3>Host Biomarker Analysis</h3>
+                    <p>Instead of detecting the pathogen, these tests measure the patient's immune response. Certain biomarkers in the blood (like procalcitonin) can help determine if an infection is bacterial, guiding the decision to use antibiotics.</p>
+                    <ul class="feature-list">
+                        <li>Aids in differentiating bacterial vs. viral infections</li>
+                        <li>Reduces unnecessary antibiotic prescriptions</li>
+                        <li>Monitors treatment response</li>
+                        <li>Focuses on the host rather than the microbe</li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <div class="cards" id="diagCards" role="list">
-
-          <!-- Card template: each is original copy -->
-          <article class="panel pad card" role="listitem" data-tags="phenotypic mic broth etest euCAST CLSI culture">
-            <div class="tag">Phenotypic</div>
-            <h3>Antimicrobial Susceptibility Testing (AST)</h3>
-            <p>Gold‑standard growth‑based assays that quantify inhibition by a drug. Common formats include disk diffusion, gradient strips, and broth microdilution to report MIC (minimum inhibitory concentration) with EUCAST/CLSI breakpoints.</p>
-            <details><summary>Where it shines</summary>
-              <ul>
-                <li>Directly measures <b>phenotypic</b> response (what the bug actually does).</li>
-                <li>Supports de‑escalation and targeted therapy once culture is positive.</li>
-              </ul>
-              <p><i>Limitations:</i> culture time (hours–days), special handling for fastidious organisms.</p>
-            </details>
-          </article>
-
-          <article class="panel pad card" role="listitem" data-tags="rapid id ms maldi toff clinical">
-            <div class="tag">Rapid ID</div>
-            <h3>MALDI‑TOF MS Identification</h3>
-            <p>Matrix‑assisted laser desorption/ionization time‑of‑flight quickly fingerprints microbial proteins to identify species from culture in minutes; coupling with targeted tests can flag specific resistance mechanisms.</p>
-            <details><summary>Where it shines</summary>
-              <ul>
-                <li>Minutes‑level turnaround for species ID in routine labs.</li>
-                <li>High accuracy and reduced per‑sample cost after instrument purchase.</li>
-              </ul>
-              <p><i>Limitations:</i> identification ≠ susceptibility; still relies on AST to quantify resistance.</p>
-            </details>
-          </article>
-
-          <article class="panel pad card" role="listitem" data-tags="molecular pcr qpcr lamp carbapenemase mrsa gene">
-            <div class="tag">Molecular</div>
-            <h3>PCR / qPCR / LAMP Targets</h3>
-            <p>Amplification assays detect resistance genes (e.g., <i>mecA</i>, <i>bla<sub>KPC</sub></i>, <i>bla<sub>NDM</sub></i>) or species‑specific markers from colonies or some primary samples, supporting early isolation and therapy choices.</p>
-            <details><summary>Where it shines</summary>
-              <ul>
-                <li>Hours instead of days for high‑value resistance mechanisms.</li>
-                <li>Useful for infection prevention screening (e.g., MRSA carriage).</li>
-              </ul>
-              <p><i>Limitations:</i> targeted—will miss unknown or off‑panel mechanisms; gene ≠ expression.</p>
-            </details>
-          </article>
-
-          <article class="panel pad card" role="listitem" data-tags="genomics wgs ngs resistome snp surveillance outbreak">
-            <div class="tag">Genomics</div>
-            <h3>Whole‑Genome Sequencing (WGS)</h3>
-            <p>Short/long‑read sequencing identifies species, strain, resistome, and relatedness for outbreak tracing. Increasingly used to predict susceptibility and monitor clonal spread when paired with good metadata.</p>
-            <details><summary>Where it shines</summary>
-              <ul>
-                <li>Comprehensive view of resistance, virulence, and transmission.</li>
-                <li>Enables hospital and national surveillance programs.</li>
-              </ul>
-              <p><i>Limitations:</i> infrastructure and bioinformatics needs; genotype–phenotype gaps remain for some drugs.</p>
-            </details>
-          </article>
-
-          <article class="panel pad card" role="listitem" data-tags="metagenomics culture independent polymicrobial">
-            <div class="tag">Culture‑independent</div>
-            <h3>Metagenomic Sequencing</h3>
-            <p>Direct sequencing from clinical specimens can identify pathogens and resistance markers in complex or culture‑negative infections.</p>
-            <details><summary>Where it shines</summary>
-              <ul>
-                <li>Hard‑to‑grow organisms or mixed infections.</li>
-                <li>Potentially faster when culture fails.</li>
-              </ul>
-              <p><i>Limitations:</i> host background, contamination control, and interpretation complexity.</p>
-            </details>
-          </article>
-
-          <article class="panel pad card" role="listitem" data-tags="phenotypic rapid carbapenemase carba np lateral flow">
-            <div class="tag">Rapid phenotypic</div>
-            <h3>Enzyme & Lateral‑Flow Tests</h3>
-            <p>Colorimetric or immunochromatographic assays (e.g., Carba NP, lateral‑flow for OXA‑48/KPC/NDM) detect specific resistance enzymes within hours.</p>
-            <details><summary>Where it shines</summary>
-              <ul>
-                <li>Fast flagging of critical resistance for IPC and therapeutics.</li>
-                <li>Simple workflow; useful in resource‑limited settings.</li>
-              </ul>
-            </details>
-          </article>
-
-        </div>
-      </div>
     </section>
 
-    <!-- -------------------- REMEDIAL MEASURES -------------------- -->
-    <section id="remedies">
-      <div class="container">
-        <p class="section-kicker">Actionable Counter‑Measures</p>
+    <!-- NEW Remedial Measures Section -->
+    <section class="remedial-measures" id="remedial-measures">
         <h2 class="section-title">Remedial Measures</h2>
-        <div class="cards">
-          <article class="panel pad card">
-            <div class="tag">Stewardship</div>
-            <h3>Antimicrobial Stewardship (the 5 D’s)</h3>
-            <ul>
-              <li><b>Right Dx</b> (accurate diagnosis) → use diagnostics early.</li>
-              <li><b>Right Drug</b> (AWaRe‑guided selection).</li>
-              <li><b>Right Dose</b> (PK/PD aware), <b>Right Duration</b>, <b>Right De‑escalation</b>.</li>
-            </ul>
-            <p>Programs align prescribing to evidence and local resistance data; they reduce mortality, toxicity, and costs.</p>
-          </article>
-
-          <article class="panel pad card">
-            <div class="tag">IPC</div>
-            <h3>Infection Prevention & Control</h3>
-            <p>Hand hygiene, catheter stewardship, isolation, environmental cleaning, and <b>vaccination</b> lower infection burden and resistance selection. WASH improvements matter across hospitals and communities.</p>
-          </article>
-
-          <article class="panel pad card">
-            <div class="tag">Therapeutics</div>
-            <h3>Next‑gen Options</h3>
-            <ul>
-              <li><b>New/Reserve antibiotics</b> with stewardship guardrails.</li>
-              <li><b>Phage therapy</b> (personalized cocktails; often adjunctive).</li>
-              <li><b>CRISPR‑based antimicrobials</b> (experimental, targeted killing).</li>
-              <li>Synergy combos, β‑lactam/β‑lactamase inhibitors, and immune adjuncts.</li>
-            </ul>
-          </article>
-
-          <article class="panel pad card">
-            <div class="tag">Systems</div>
-            <h3>Surveillance & One Health</h3>
-            <p>Use hospital antibiograms and contribute to national programs (e.g., WHO GLASS) spanning human, animal, and environmental sectors. Link stewardship metrics with consumption (AWaRe) targets.</p>
-          </article>
+        <div class="remedial-measures-container">
+            <div class="measure-card">
+                <div class="measure-icon">💊</div>
+                <h3>Stewardship</h3>
+                <p>Promoting the responsible and optimal use of antimicrobials in both human and animal health to preserve their effectiveness and slow the development of resistance.</p>
+            </div>
+            <div class="measure-card">
+                <div class="measure-icon">📈</div>
+                <h3>Surveillance</h3>
+                <p>Tracking and monitoring the spread of resistant organisms through global and national data collection systems to inform public health responses and policies.</p>
+            </div>
+            <div class="measure-card">
+                <div class="measure-icon">💡</div>
+                <h3>Innovation & R&D</h3>
+                <p>Investing in the research and development of new antibiotics, alternative therapies (like phages), vaccines, and rapid diagnostic tools to stay ahead of evolving pathogens.</p>
+            </div>
+            <div class="measure-card">
+                <div class="measure-icon">🧼</div>
+                <h3>Infection Control</h3>
+                <p>Implementing strong hygiene and sanitation practices in healthcare facilities and communities to prevent infections from occurring in the first place.</p>
+            </div>
+            <div class="measure-card">
+                <div class="measure-icon">📢</div>
+                <h3>Public Awareness</h3>
+                <p>Educating the public, policymakers, and healthcare professionals about the threat of AMR and their role in preserving the effectiveness of antimicrobial drugs.</p>
+            </div>
+            <div class="measure-card">
+                <div class="measure-icon">🌐</div>
+                <h3>One Health Approach</h3>
+                <p>Recognizing the interconnectedness of human, animal, and environmental health, and implementing coordinated strategies across all sectors to combat AMR.</p>
+            </div>
         </div>
-      </div>
     </section>
 
-    <!-- -------------------- CASE ANALYSIS -------------------- -->
-    <section id="cases">
-      <div class="container">
-        <p class="section-kicker">Worked Example</p>
-        <h2 class="section-title">Case Analysis — ESBL <i>E. coli</i> Bloodstream Infection</h2>
-        <div class="panel pad">
-          <p><b>Scenario.</b> A 62‑year‑old with fever, flank pain, and hypotension. Labs: WBC 18×10<sup>9</sup>/L, CRP 180 mg/L, lactate 3.1 mmol/L. Urine and two blood cultures collected. Empiric therapy: ceftriaxone + amikacin; fluids and source control.</p>
-          <div class="timeline">
-            <div class="tl-item"><time>Day 1</time><div>Urinalysis positive; bedside ultrasound suggests obstructive uropathy; stent placed. MALDI‑TOF IDs <i>E. coli</i> from urine at 18h.</div></div>
-            <div class="tl-item"><time>Day 2</time><div>Blood culture flags positive; AST shows ESBL phenotype (resistant to 3GC). Therapy escalated to <b>meropenem</b>. Patient stabilizes.</div></div>
-            <div class="tl-item"><time>Day 4</time><div>MIC panel returns; susceptible to piperacillin‑tazobactam and ertapenem. De‑escalate to <b>ertapenem</b>; plan total 7–10 days based on clinical course.</div></div>
-            <div class="tl-item"><time>Day 7</time><div>Afebrile; CRP and WBC improved; discharge with OPAT plan and follow‑up.
-            </div></div>
-          </div>
-          <canvas id="caseChart" class="chart" aria-label="Inflammation markers over time" role="img"></canvas>
-          <p class="meta" style="opacity:.8;margin-top:8px">Illustrative case for education only. Therapeutic decisions must follow local guidelines and clinician judgment.</p>
+    <!-- NEW Case Analysis Section -->
+    <section class="about" id="case-analysis">
+        <h2 class="section-title">Case Analysis</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <h2>Hospital Outbreak: CRE</h2>
+                <p>A 2011 outbreak of Carbapenem-resistant Enterobacteriaceae (CRE) at the NIH Clinical Center in the U.S. highlighted the danger of AMR in healthcare settings. Despite aggressive infection control measures, the highly resistant bacteria spread from a single patient to 17 others, leading to multiple deaths.</p>
+                <p>The case demonstrated how easily resistant pathogens can spread within a hospital, the limitations of last-resort antibiotics, and the critical need for rapid diagnostics and isolation protocols to contain outbreaks before they become uncontrollable.</p>
+            </div>
+            <div class="about-visual">
+                <div class="about-graphic-alt">
+                    <div class="hexagon"></div>
+                    <div class="hexagon"></div>
+                    <div class="hexagon"></div>
+                </div>
+            </div>
         </div>
-      </div>
+        <div class="about-content" style="margin-top: 80px;">
+            <div class="about-visual">
+                <div class="about-graphic"></div>
+            </div>
+            <div class="about-text">
+                <h2>Agriculture: Colistin Resistance</h2>
+                <p>In 2015, the discovery of the mcr-1 gene in China marked a turning point. This gene confers resistance to Colistin, a last-resort antibiotic, and is easily transferable between different bacteria. Its emergence was strongly linked to the heavy use of Colistin as a growth promoter in livestock feed.</p>
+                <p>This case study is a stark example of the 'One Health' principle. Antibiotic use in agriculture directly fueled the development of a critical resistance mechanism that now threatens human health globally, emphasizing the need for worldwide regulation of antibiotic use in farming.</p>
+            </div>
+        </div>
     </section>
 
-    <!-- -------------------- RESEARCH LINKS -------------------- -->
-    <section id="papers">
-      <div class="container">
-        <p class="section-kicker">Read Further</p>
-        <h2 class="section-title">Curated Research & Policy Links</h2>
-        <div class="toolbar">
-          <input id="paperSearch" class="input" placeholder="Search titles or keywords (e.g., GLASS, phage, AWaRe)…" aria-label="Filter research links" />
-          <button class="btn" id="copyVisible">Copy visible links</button>
+    <!-- NEW Research Papers Section -->
+    <section class="research-papers" id="research-papers">
+        <h2 class="section-title">Research & Resources</h2>
+        <div class="research-container">
+            <div class="research-item">
+                <div class="research-info">
+                    <h3>Global burden of bacterial antimicrobial resistance in 2019</h3>
+                    <p>Source: The Lancet</p>
+                </div>
+                <a href="#" class="research-link">Access Paper</a>
+            </div>
+            <div class="research-item">
+                <div class="research-info">
+                    <h3>WHO Report on Global Surveillance of AMR</h3>
+                    <p>Source: World Health Organization (GLASS)</p>
+                </div>
+                <a href="#" class="research-link">View Report</a>
+            </div>
+            <div class="research-item">
+                <div class="research-info">
+                    <h3>Tackling Drug-Resistant Infections Globally (O'Neill Review)</h3>
+                    <p>Source: UK Government Review on AMR</p>
+                </div>
+                <a href="#" class="research-link">Read Review</a>
+            </div>
+            <div class="research-item">
+                <div class="research-info">
+                    <h3>CDC's Antibiotic Resistance Threats Report</h3>
+                    <p>Source: Centers for Disease Control and Prevention</p>
+                </div>
+                <a href="#" class="research-link">Explore Data</a>
+            </div>
         </div>
-        <div class="papers" id="paperList" role="list">
-          <!-- Items populated below are from authoritative sources and formatted manually (original summaries). -->
-
-          <article class="paper" role="listitem" data-tags="who factsheet overview 2019 2023">
-            <strong>WHO Fact Sheet: Antimicrobial Resistance</strong>
-            <div class="meta">World Health Organization (2023, updated). Global overview of AMR burden and drivers.</div>
-            <a href="https://www.who.int/news-room/fact-sheets/detail/antimicrobial-resistance" target="_blank" rel="noopener">who.int • Fact sheet</a>
-          </article>
-
-          <article class="paper" role="listitem" data-tags="global burden lancet 2019 study estimates">
-            <strong>Global burden of bacterial AMR in 2019</strong>
-            <div class="meta">The Lancet (2022). Comprehensive mortality & morbidity estimates across 204 countries.</div>
-            <a href="https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(21)02724-0/fulltext" target="_blank" rel="noopener">thelancet.com • Article</a>
-          </article>
-
-          <article class="paper" role="listitem" data-tags="trend 1990 2021 lancet 2024">
-            <strong>Global AMR mortality 1990–2021</strong>
-            <div class="meta">The Lancet (2024). Trends over three decades by pathogen and region.</div>
-            <a href="https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(24)01867-1/fulltext" target="_blank" rel="noopener">thelancet.com • Article</a>
-          </article>
-
-          <article class="paper" role="listitem" data-tags="cdc us threats 2019 report">
-            <strong>Antibiotic Resistance Threats in the United States</strong>
-            <div class="meta">CDC (2019). U.S. burden and priority pathogens; accessible graphics and data.</div>
-            <a href="https://ndc.services.cdc.gov/wp-content/uploads/Antibiotic-Resistance-Threats-in-the-United-States-2019.pdf" target="_blank" rel="noopener">cdc.gov • PDF report</a>
-          </article>
-
-          <article class="paper" role="listitem" data-tags="glass surveillance who antimicrobial consumption amu amr">
-            <strong>WHO GLASS: Global AMR & Antimicrobial Use Surveillance</strong>
-            <div class="meta">WHO (2025). Program and latest report on antibiotic use and resistance monitoring.</div>
-            <a href="https://www.who.int/publications/i/item/9789240108127" target="_blank" rel="noopener">who.int • GLASS report</a>
-          </article>
-
-          <article class="paper" role="listitem" data-tags="aware classification stewardship access watch reserve who">
-            <strong>WHO AWaRe classification of antibiotics</strong>
-            <div class="meta">WHO (2023). Stewardship tool to monitor and optimize antibiotic consumption.</div>
-            <a href="https://www.who.int/publications/i/item/WHO-MHP-HPS-EML-2023.04" target="_blank" rel="noopener">who.int • Policy tool</a>
-          </article>
-
-          <article class="paper" role="listitem" data-tags="maldi tof identification review 2024 clinical microbiology">
-            <strong>MALDI‑TOF in the real‑life diagnostic lab</strong>
-            <div class="meta">Calderaro et&nbsp;al. (2024). Mini‑review of MALDI‑TOF MS in clinical microbiology.</div>
-            <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10892259/" target="_blank" rel="noopener">ncbi.nlm.nih.gov • Open access</a>
-          </article>
-
-          <article class="paper" role="listitem" data-tags="crispr antimicrobials review 2023 2024">
-            <strong>CRISPR‑based antimicrobials</strong>
-            <div class="meta">Mayorga‑Ramos et&nbsp;al. (2023) and de&nbsp;la&nbsp;Fuente&nbsp;Tagarro et&nbsp;al. (2024). Concepts and delivery challenges.</div>
-            <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10353011/" target="_blank" rel="noopener">2023 review</a> ·
-            <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11672446/" target="_blank" rel="noopener">2024 review</a>
-          </article>
-
-          <article class="paper" role="listitem" data-tags="phage therapy clinical outcomes 2024 nature">
-            <strong>Personalized bacteriophage therapy: outcomes for 100 patients</strong>
-            <div class="meta">Pirnay et&nbsp;al. (2024). Clinical improvement and eradication rates with adjunctive phage therapy.</div>
-            <a href="https://www.nature.com/articles/s41564-024-01705-x" target="_blank" rel="noopener">nature.com • Article</a>
-          </article>
-
-        </div>
-      </div>
     </section>
 
-  </main>
-
-  <footer>
-    <div class="container">
-      <p><b>AMR Nexus</b> — educational website template. Built with semantic HTML, modern CSS, and vanilla JS. Content is original; please consult cited sources and local guidelines before clinical use.</p>
-      <p>Theme: Futuristic neon + glassmorphism. Keyboard navigation supported. <button id="printBtn" class="btn">Print / Save to PDF</button></p>
-    </div>
-  </footer>
-
-  <button id="toTop" class="btn">↑ Top</button>
-
-  <script>
-    // -------------------- NAV ACTIVE STATE --------------------
-    const links=[...document.querySelectorAll('nav a')];
-    const sections=links.map(a=>document.querySelector(a.getAttribute('href')));
-    const io=new IntersectionObserver(entries=>{
-      entries.forEach(e=>{ if(e.isIntersecting){
-        links.forEach(l=>l.classList.toggle('active', l.getAttribute('href')==='#'+e.target.id));
-      }});
-    },{rootMargin:'-50% 0px -45% 0px', threshold:[0,1]});
-    sections.forEach(s=>io.observe(s));
-
-    // -------------------- THEME TOGGLE --------------------
-    const themeBtn=document.getElementById('themeBtn');
-    const prefersLight=window.matchMedia('(prefers-color-scheme: light)');
-    const apply=(t)=>document.documentElement.setAttribute('data-theme',t);
-    const saved=localStorage.getItem('theme');
-    apply(saved? saved : (prefersLight.matches? 'light':'dark'));
-    themeBtn.onclick=()=>{const t=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark'; apply(t); localStorage.setItem('theme',t)}
-
-    // -------------------- PARTICLE BACKGROUND --------------------
-    const bg=document.getElementById('bg');
-    const ctx=bg.getContext('2d');
-    let pxRatio=window.devicePixelRatio||1; let W,H; let nodes=[];
-    function resize(){W=bg.clientWidth=window.innerWidth; H=bg.clientHeight=window.innerHeight; bg.width=W*pxRatio; bg.height=H*pxRatio; ctx.setTransform(pxRatio,0,0,pxRatio,0,0)}
-    window.addEventListener('resize',resize,{passive:true}); resize();
-    function spawn(){nodes=Array.from({length:80},()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.4,vy:(Math.random()-.5)*.4,r:1+Math.random()*2}));}
-    spawn();
-    function step(){ctx.clearRect(0,0,W,H); ctx.globalAlpha=.8; 
-      for(let i=0;i<nodes.length;i++){
-        const n=nodes[i]; n.x+=n.vx; n.y+=n.vy; if(n.x<0||n.x>W) n.vx*=-1; if(n.y<0||n.y>H) n.vy*=-1;
-        ctx.beginPath(); ctx.arc(n.x,n.y,n.r,0,Math.PI*2); ctx.fillStyle='rgba(124,249,210,.8)'; ctx.fill();
-        // connect nearby
-        for(let j=i+1;j<nodes.length;j++){
-          const m=nodes[j]; const dx=n.x-m.x, dy=n.y-m.y; const d=Math.hypot(dx,dy);
-          if(d<120){ ctx.strokeStyle='rgba(167,139,250,.15)'; ctx.lineWidth=1; ctx.beginPath(); ctx.moveTo(n.x,n.y); ctx.lineTo(m.x,m.y); ctx.stroke(); }
-        }
-      }
-      requestAnimationFrame(step);
-    }
-    step();
-
-    // -------------------- FILTERABLE CARDS --------------------
-    function attachFilter(inputId, listId, itemSelector){
-      const input=document.getElementById(inputId); const list=document.getElementById(listId);
-      input.addEventListener('input',()=>{
-        const q=input.value.trim().toLowerCase();
-        list.querySelectorAll(itemSelector).forEach(el=>{
-          const text=el.textContent.toLowerCase()+ ' ' + (el.dataset.tags||'');
-          el.style.display = text.includes(q)? 'grid':'none';
-        });
-      });
-    }
-    attachFilter('diagSearch','diagCards','.card');
-    attachFilter('paperSearch','paperList','.paper');
-
-    // expand/collapse details in diagnostics
-    const expandAll=document.getElementById('expandAll');
-    const collapseAll=document.getElementById('collapseAll');
-    expandAll.onclick=()=>document.querySelectorAll('#diagCards details').forEach(d=>d.open=true);
-    collapseAll.onclick=()=>document.querySelectorAll('#diagCards details').forEach(d=>d.open=false);
-
-    // -------------------- CASE CHART (vanilla canvas) --------------------
-    const c=document.getElementById('caseChart'); const cx=c.getContext('2d');
-    function drawChart(){
-      const dpr=window.devicePixelRatio||1; const w=c.clientWidth, h=280; c.width=w*dpr; c.height=h*dpr; cx.setTransform(dpr,0,0,dpr,0,0);
-      const pad=40; const W=w-pad*2; const H=h-pad*2;
-      // Example data: CRP (mg/L), WBC (x10^9/L) scaled to same axis for demo
-      const days=[1,2,3,4,5,6,7];
-      const crp=[180, 160, 130, 90, 70, 50, 30];
-      const wbc=[18, 16, 14, 12, 10, 9, 8];
-      const maxY=200; // upper bound
-      // axes
-      cx.clearRect(0,0,w,h); cx.translate(pad,pad);
-      cx.strokeStyle='rgba(255,255,255,.25)'; cx.lineWidth=1;
-      cx.beginPath(); cx.moveTo(0,0); cx.lineTo(0,H); cx.lineTo(W,H); cx.stroke();
-      // grid
-      cx.font='12px system-ui'; cx.fillStyle='rgba(255,255,255,.6)';
-      for(let i=0;i<=6;i++){ const x=W*i/6; cx.strokeStyle='rgba(255,255,255,.1)'; cx.beginPath(); cx.moveTo(x,0); cx.lineTo(x,H); cx.stroke(); cx.fillText('D'+(i+1), x-8, H+16); }
-      for(let gy=0; gy<=4; gy++){ const y=H*gy/4; cx.strokeStyle='rgba(255,255,255,.1)'; cx.beginPath(); cx.moveTo(0,y); cx.lineTo(W,y); cx.stroke(); cx.fillText((maxY - maxY*gy/4).toFixed(0), -32, y+4); }
-      // line helper
-      function line(series, color){
-        cx.strokeStyle=color; cx.lineWidth=2; cx.beginPath();
-        series.forEach((v,i)=>{ const x=W*(i/(series.length-1)); const y=H*(1 - v/maxY); if(i===0) cx.moveTo(x,y); else cx.lineTo(x,y); });
-        cx.stroke();
-      }
-      line(crp,'rgba(124,249,210,.95)'); // CRP
-      // scale WBC to CRP axis (multiply by ~10)
-      line(wbc.map(v=>v*10),'rgba(167,139,250,.95)');
-      // legend
-      cx.fillStyle='rgba(255,255,255,.8)';
-      cx.fillRect(W-160,10,150,46);
-      cx.fillStyle='#0b1020'; cx.fillText('Legend', W-150, 26);
-      cx.fillStyle='rgba(124,249,210,1)'; cx.fillRect(W-150, 32, 10, 2);
-      cx.fillStyle='#0b1020'; cx.fillText('CRP (mg/L)', W-134, 36);
-      cx.fillStyle='rgba(167,139,250,1)'; cx.fillRect(W-150, 46, 10, 2);
-      cx.fillStyle='#0b1020'; cx.fillText('WBC (×10⁹/L) ×10', W-134, 50);
-      cx.setTransform(1,0,0,1,0,0);
-    }
-    new ResizeObserver(drawChart).observe(document.getElementById('cases'));
-
-    // -------------------- PAPERS: COPY VISIBLE --------------------
-    document.getElementById('copyVisible').onclick=()=>{
-      const items=[...document.querySelectorAll('#paperList .paper')].filter(x=>x.style.display!=="none");
-      const text=items.map(x=>{
-        const title=x.querySelector('strong')?.textContent?.trim();
-        const link=x.querySelector('a')?.href; return `${title} — ${link}`;
-      }).join('\n');
-      navigator.clipboard.writeText(text).then(()=>{
-        const b=document.getElementById('copyVisible'); const t=b.textContent; b.textContent='Copied!'; setTimeout(()=>b.textContent=t,1200);
-      });
-    };
-
-    // -------------------- MISC: PRINT + TO TOP --------------------
-    document.getElementById('printBtn').onclick=()=>window.print();
-    const toTop=document.getElementById('toTop');
-    window.addEventListener('scroll',()=>{toTop.style.display=window.scrollY>600?'block':'none'});
-    toTop.onclick=()=>window.scrollTo({top:0, behavior:'smooth'});
-  </script>
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-container">
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
+            <div class="contact-info">
+                <h3>Connect With Us</h3>
+                <div class="info-item">
+                    <div class="info-icon">📧</div>
+                    <div class="info-details">
+                        <h4>Email</h4>
+                        <p>contact@amr-awareness.org</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">📱</div>
+                    <div class="info-details">
+                        <h4>Phone</h4>
+                        <p>+1 (555) 123-4567</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">📍</div>
+                    <div class="info-details">
+                        <h4>Location</h4>
+                        <p>Global Health Institute</p>
+                    </div>
+                </div>
+                <div class="map-container">
+                    <div class="map-placeholder">
+                        <p>Our Global Network</p>
+                    </div>
+                    <div class="map-overlay"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+<script src="script.js"></script>
 </body>
 </html>
