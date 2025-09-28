@@ -3,20 +3,17 @@ function createParticles() {
     const particlesContainer = document.getElementById('particles');
     if (!particlesContainer) return;
     const particleCount = 30;
-
     for (let i = 0; i < particleCount; i++) {
         const particle = document.createElement('div');
         particle.className = 'particle';
         particle.style.left = Math.random() * 100 + '%';
         particle.style.animationDelay = Math.random() * 15 + 's';
         particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
-        
         if (Math.random() > 0.5) {
             particle.style.setProperty('--particle-color', '#00B2FF');
             const before = particle.style.getPropertyValue('--particle-color');
             particle.style.background = '#00B2FF';
         }
-        
         particlesContainer.appendChild(particle);
     }
 }
@@ -32,28 +29,34 @@ if (menuToggle && navLinks) {
     });
 }
 
-// Close mobile menu when clicking a link
 document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-        if (menuToggle && navLinks) {
-            menuToggle.classList.remove('active');
-            navLinks.classList.remove('active');
+    link.addEventListener('click', (e) => {
+        // Prevent dropdown parent link from navigating on mobile
+        if (window.innerWidth <= 768 && link.parentElement.classList.contains('dropdown')) {
+            e.preventDefault();
+            link.parentElement.classList.toggle('active');
+        } else {
+             if (menuToggle && navLinks) {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            }
         }
     });
 });
 
-// Active navigation highlighting
-const sections = document.querySelectorAll('section');
-const navItems = document.querySelectorAll('.nav-link');
+// Active navigation highlighting based on current page
+function highlightCurrentPageLink() {
+    const currentPage = window.location.pathname.split('/').pop();
+    const navItems = document.querySelectorAll('.nav-link');
 
-function updateActiveNav() {
-    const scrollPosition = window.pageYOffset + 100;
-
-    sections.forEach((section) => {
-        if (scrollPosition >= section.offsetTop && scrollPosition < section.offsetTop + section.offsetHeight) {
-            navItems.forEach(item => item.classList.remove('active'));
-            const currentNav = document.querySelector(`.nav-link[href="#${section.id}"]`);
-            if (currentNav) currentNav.classList.add('active');
+    navItems.forEach(link => {
+        const linkPage = link.getAttribute('href').split('/').pop().split('#')[0];
+        if (linkPage === currentPage || (currentPage === '' && linkPage === 'index.html')) {
+            link.classList.add('active');
+            // If it's a dropdown link, also activate the parent
+            if (link.closest('.dropdown-menu')) {
+                link.closest('.dropdown').querySelector('.nav-link').classList.add('active');
+            }
         }
     });
 }
@@ -66,27 +69,7 @@ window.addEventListener('scroll', function() {
     } else {
         navbar.classList.remove('scrolled');
     }
-    updateActiveNav();
 });
-
-// Initial active nav update
-updateActiveNav();
-
-// --- THIS IS THE CODE FOR SMOOTH SCROLLING ---
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault(); // This stops the instant jump
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth', // This creates the smooth animation
-                block: 'start'
-            });
-        }
-    });
-});
-// --- END OF SMOOTH SCROLLING CODE ---
-
 
 // Feature tabs functionality
 const tabs = document.querySelectorAll('.tab-item');
@@ -95,10 +78,8 @@ const panels = document.querySelectorAll('.content-panel');
 tabs.forEach(tab => {
     tab.addEventListener('click', () => {
         const tabId = tab.getAttribute('data-tab');
-        
         tabs.forEach(t => t.classList.remove('active'));
         panels.forEach(p => p.classList.remove('active'));
-        
         tab.classList.add('active');
         document.getElementById(tabId).classList.add('active');
     });
@@ -114,71 +95,119 @@ if (contactForm) {
     });
 }
 
-// Initialize particles
+// Particle creation
 createParticles();
 
-// Text rotation with typewriter effect
+// Text rotator for homepage
 const textSets = document.querySelectorAll('.text-set');
-let currentIndex = 0;
-let isAnimating = false;
-
-function animateTextIn(textSet) {
-    const typewriterText = textSet.querySelector('.typewriter-text');
-    const subtitle = textSet.querySelector('.subtitle');
-    const text = typewriterText.textContent;
-    const textLength = text.length;
-    
-    // Dynamically set animation based on text length for consistent speed
-    const typingDuration = textLength * 0.08; // 0.08s per character
-    const steps = textLength;
-    
-    typewriterText.style.width = '0'; // Reset width
-    typewriterText.style.animation = 'none'; // Reset animation
-    
-    // Force reflow to restart animation
-    typewriterText.offsetHeight; 
-
-    typewriterText.style.animation = `typing ${typingDuration}s steps(${steps}, end) forwards, blink-caret .75s step-end infinite`;
-
-    // Show subtitle after typing animation is complete
-    setTimeout(() => {
-        subtitle.classList.add('visible');
-    }, typingDuration * 1000); // Convert duration to ms
-}
-
-function animateTextOut(textSet) {
-    const subtitle = textSet.querySelector('.subtitle');
-    subtitle.classList.remove('visible');
-}
-
-function rotateText() {
-    if (isAnimating || textSets.length <= 1) return;
-    isAnimating = true;
-
-    const currentSet = textSets[currentIndex];
-    const nextIndex = (currentIndex + 1) % textSets.length;
-    const nextSet = textSets[nextIndex];
-
-    // Animate out current text (simply by making it invisible)
-    animateTextOut(currentSet);
-    currentSet.classList.remove('active');
-
-    // After a short delay, animate in the next one
-    setTimeout(() => {
-        nextSet.classList.add('active');
-        animateTextIn(nextSet);
-        
-        currentIndex = nextIndex;
-        isAnimating = false;
-    }, 500); // 0.5s delay between texts
-}
-
-// Initialize and start the rotation
 if (textSets.length > 0) {
-    // Initial animation for the first text set
+    let currentIndex = 0;
+    let isAnimating = false;
+
+    function animateTextIn(textSet) {
+        const typewriterText = textSet.querySelector('.typewriter-text');
+        const subtitle = textSet.querySelector('.subtitle');
+        const text = typewriterText.textContent;
+        const textLength = text.length;
+        const typingDuration = textLength * 0.08;
+        const steps = textLength;
+        typewriterText.style.width = '0';
+        typewriterText.style.animation = 'none';
+        typewriterText.offsetHeight; 
+        typewriterText.style.animation = `typing ${typingDuration}s steps(${steps}, end) forwards, blink-caret .75s step-end infinite`;
+        setTimeout(() => {
+            subtitle.classList.add('visible');
+        }, typingDuration * 1000);
+    }
+
+    function animateTextOut(textSet) {
+        const subtitle = textSet.querySelector('.subtitle');
+        subtitle.classList.remove('visible');
+    }
+
+    function rotateText() {
+        if (isAnimating || textSets.length <= 1) return;
+        isAnimating = true;
+        const currentSet = textSets[currentIndex];
+        const nextIndex = (currentIndex + 1) % textSets.length;
+        const nextSet = textSets[nextIndex];
+        animateTextOut(currentSet);
+        currentSet.classList.remove('active');
+        setTimeout(() => {
+            nextSet.classList.add('active');
+            animateTextIn(nextSet);
+            currentIndex = nextIndex;
+            isAnimating = false;
+        }, 500);
+    }
+
     textSets[0].classList.add('active');
     animateTextIn(textSets[0]);
-
-    // Start rotation
-    setInterval(rotateText, 6000); // Change text every 6 seconds
+    setInterval(rotateText, 6000);
 }
+
+// SCRIPT for Cases & Success Page
+function setupCasesPage() {
+    const initialView = document.getElementById('initial-view');
+    const caseLinksView = document.getElementById('case-links');
+    const successLinksView = document.getElementById('success-links');
+    
+    const viewCasesBtn = document.getElementById('view-cases-btn');
+    const viewSuccessBtn = document.getElementById('view-success-btn');
+    const backButtons = document.querySelectorAll('.back-button');
+
+    if (!initialView) return; 
+
+    viewCasesBtn.addEventListener('click', () => {
+        initialView.classList.add('hidden');
+        caseLinksView.classList.remove('hidden');
+    });
+
+    viewSuccessBtn.addEventListener('click', () => {
+        initialView.classList.add('hidden');
+        successLinksView.classList.remove('hidden');
+    });
+
+    backButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            initialView.classList.remove('hidden');
+            caseLinksView.classList.add('hidden');
+            successLinksView.classList.add('hidden');
+        });
+    });
+}
+
+// SCRIPT for More Topics Page
+function setupMorePage() {
+    const initialView = document.getElementById('more-initial-view');
+    if (!initialView) return; // Exit if not on the "more" page
+
+    const cards = document.querySelectorAll('.more-card');
+    const contentContainers = document.querySelectorAll('.more-content-container');
+    const backButtons = document.querySelectorAll('.back-button');
+    const sectionTitle = document.querySelector('.more-topics .section-title');
+
+    cards.forEach(card => {
+        card.addEventListener('click', () => {
+            const targetId = card.getAttribute('data-target');
+            const targetContent = document.getElementById(targetId);
+
+            initialView.classList.add('hidden');
+            targetContent.classList.remove('hidden');
+        });
+    });
+
+    backButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            initialView.classList.remove('hidden');
+            contentContainers.forEach(container => container.classList.add('hidden'));
+        });
+    });
+}
+
+// Run functions on page load
+document.addEventListener('DOMContentLoaded', () => {
+    highlightCurrentPageLink();
+    setupCasesPage();
+    setupMorePage(); 
+});
