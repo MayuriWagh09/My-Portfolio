@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMR Case Studies & Success Stories</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+    <div class="grid-bg"></div>
+    <div class="gradient-overlay"></div>
+    <div class="scanlines"></div>
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo-link"><svg class="logo-svg" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#08D9D6;stop-opacity:1" /><stop offset="100%" style="stop-color:#2575FC;stop-opacity:1" /></linearGradient></defs><polygon points="20,2 38,14 38,26 20,38 2,26 2,14" fill="none" stroke="url(#logoGradient)" stroke-width="2"/><polygon points="20,8 32,16 32,24 20,32 8,24 8,16" fill="url(#logoGradient)" opacity="0.3"/><circle cx="20" cy="20" r="3" fill="url(#logoGradient)"/></svg><span class="logo-text">AMR Awareness</span></a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="overview.html" class="nav-link">Overview</a></li>
+                <li><a href="diagnostics.html" class="nav-link">Diagnostics</a></li>
+                <li><a href="measures.html" class="nav-link">Measures</a></li>
+                <li><a href="cases.html" class="nav-link">Cases</a></li>
+                <li><a href="research.html" class="nav-link">Research</a></li>
+                <li class="dropdown">
+                    <a href="more.html" class="nav-link">More</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="more.html#ai">AI in AMR</a></li>
+                        <li><a href="more.html#eskape">ESKAPE Pathogens</a></li>
+                        <li><a href="more.html#who">WHO and AMR</a></li>
+                        <li><a href="more.html#one-health">One Health Approach</a></li>
+                    </ul>
+                </li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></div>
+        </div>
+    </nav>
+    <main>
+        <section class="cases-success page-content" id="cases-success">
+            <h2 class="section-title">Case Studies & Success Stories</h2>
+
+            <!-- Initial View: Two Cards -->
+            <div id="initial-view">
+                <div class="cases-success-container">
+                    <div class="split-card" id="view-cases-btn">
+                        <div class="split-icon">⚠️</div>
+                        <h3>Case Studies</h3>
+                        <p>Explore real-world examples of antimicrobial resistance outbreaks and their impact on public health. Understand the challenges and learn from past events.</p>
+                        <button class="split-link">View Case Files</button>
+                    </div>
+                    <div class="split-card" id="view-success-btn">
+                        <div class="split-icon">✨</div>
+                        <h3>Success Stories</h3>
+                        <p>Discover instances where new treatments, stewardship programs, and innovative diagnostics have successfully combated resistant infections and improved patient outcomes.</p>
+                        <button class="split-link">Explore Successes</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hidden View 1: Case Links -->
+            <div class="link-list-container hidden" id="case-links">
+                <h2 class="section-title"></h2>
+                <div class="research-container">
+                    <div class="research-item">
+                        <div class="research-info">
+                            <h3>Multidrug-Resistant Infections in Jordan Hospital</h3>
+                            <p>Source: Microbiology Journal | A study revealed high rates of resistant bacteria, highlighting critical infection control challenges and the need for improved stewardship.</p>
+                        </div>
+                        <a href="https://microbiologyjournal.org/the-hidden-threat-of-antimicrobial-resistance-a-case-study-from-a-private-hospital-in-jordan/?utm" target="_blank" rel="nofollow noopener" class="research-link">Read Study</a>
+                    </div>
+                    <div class="research-item">
+                        <div class="research-info">
+                            <h3>Hospital Stewardship Program—Lekma Hospital, Ghana</h3>
+                            <p>Source: AMR Industry Alliance | This report details how a hospital-wide stewardship program successfully reduced inappropriate antibiotic prescribing and lowered AMR rates.</p>
+                        </div>
+                        <a href="https://www.amrindustryalliance.org/wp-content/uploads/2024/04/Inspiring-Action-The-Impact-of-and-Recommendations-on-Including-Diagnostics-in-National-Action-Plans.pdf?utm" target="_blank" rel="nofollow noopener" class="research-link">View Report</a>
+                    </div>
+                    <div class="research-item">
+                        <div class="research-info">
+                            <h3>Antimicrobial Resistance in Indian Hospitals</h3>
+                            <p>Source: NCBI PMC | An analysis of rising resistance in key pathogens like E. coli and MRSA, driving the implementation of new hospital control strategies across India.</p>
+                        </div>
+                        <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6563737/?utm" target="_blank" rel="nofollow noopener" class="research-link">Analyze Data</a>
+                    </div>
+                </div>
+                <button class="back-button">← Back to Overview</button>
+            </div>
+
+            <!-- Hidden View 2: Success Links -->
+            <div class="link-list-container hidden" id="success-links">
+                <h2 class="section-title">Success Stories</h2>
+                <div class="research-container">
+                    <div class="research-item">
+                        <div class="research-info">
+                            <h3>PGIMER Hospital, India</h3>
+                            <p>Source: GARDP.org | A focused antibiotic stewardship initiative led to a significant reduction in inappropriate antibiotic use and demonstrably improved patient outcomes.</p>
+                        </div>
+                        <a href="https://gardp.org/stories/improving-antibiotic-stewardship-a-story-from-india/?utm" target="_blank" rel="nofollow noopener" class="research-link">Read Story</a>
+                    </div>
+                    <div class="research-item">
+                        <div class="research-info">
+                            <h3>Palestinian Medical Complex, ICU</h3>
+                            <p>Source: NCBI PMC | A targeted stewardship program in the ICU successfully cut antibiotic consumption by 24% and shortened patient hospital stays without compromising safety.</p>
+                        </div>
+                        <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5867097/?utm" target="_blank" rel="nofollow noopener" class="research-link">View Study</a>
+                    </div>
+                    <div class="research-item">
+                        <div class="research-info">
+                            <h3>Dr Soetomo Hospital, Indonesia</h3>
+                            <p>Source: Fleming Fund | By combining active surveillance with a robust stewardship program, this hospital enhanced rational antibiotic prescribing and improved infection control in its surgical units.</p>
+                        </div>
+                        <a href="https://www.flemingfund.org/publications/case-study-surveillance-of-antimicrobial-use-and-stewardship-in-indonesia-hospital/?utm" target="_blank" rel="nofollow noopener" class="research-link">View Case Study</a>
+                    </div>
+                </div>
+                <button class="back-button">← Back to Overview</button>
+            </div>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>

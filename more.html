@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>More AMR Topics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+    <div class="grid-bg"></div>
+    <div class="gradient-overlay"></div>
+    <div class="scanlines"></div>
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo-link"><svg class="logo-svg" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#08D9D6;stop-opacity:1" /><stop offset="100%" style="stop-color:#2575FC;stop-opacity:1" /></linearGradient></defs><polygon points="20,2 38,14 38,26 20,38 2,26 2,14" fill="none" stroke="url(#logoGradient)" stroke-width="2"/><polygon points="20,8 32,16 32,24 20,32 8,24 8,16" fill="url(#logoGradient)" opacity="0.3"/><circle cx="20" cy="20" r="3" fill="url(#logoGradient)"/></svg><span class="logo-text">AMR Awareness</span></a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="overview.html" class="nav-link">Overview</a></li>
+                <li><a href="diagnostics.html" class="nav-link">Diagnostics</a></li>
+                <li><a href="measures.html" class="nav-link">Measures</a></li>
+                <li><a href="cases.html" class="nav-link">Cases</a></li>
+                <li><a href="research.html" class="nav-link">Research</a></li>
+                <li class="dropdown">
+                    <a href="more.html" class="nav-link">More</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="more.html#ai">AI in AMR</a></li>
+                        <li><a href="more.html#eskape">ESKAPE Pathogens</a></li>
+                        <li><a href="more.html#who">WHO and AMR</a></li>
+                        <li><a href="more.html#one-health">One Health Approach</a></li>
+                    </ul>
+                </li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></div>
+        </div>
+    </nav>
+    <main>
+        <section class="more-topics page-content" id="more-topics">
+            <!-- Initial View: Four Cards -->
+            <div id="more-initial-view">
+                <h2 class="section-title">Explore More Topics</h2>
+                <div class="more-cards-container">
+                    <div class="more-card" data-target="ai-content"><div class="more-icon">🤖</div><div class="more-card-content"><h3>AI in AMR</h3><p>Learn how Artificial Intelligence is accelerating the discovery of new antibiotics and predictive modeling of resistance patterns.</p><button class="split-link">Show Information</button></div></div>
+                    <div class="more-card" data-target="eskape-content"><div class="more-icon">🦠</div><div class="more-card-content"><h3>ESKAPE Pathogens</h3><p>Understand the six most critical multi-drug resistant bacteria that are responsible for the majority of hospital-acquired infections worldwide.</p><button class="split-link">Show Information</button></div></div>
+                    <div class="more-card" data-target="who-content"><div class="more-icon">🌍</div><div class="more-card-content"><h3>WHO and AMR</h3><p>Explore the global action plans and surveillance systems established by the World Health Organization to combat antimicrobial resistance.</p><button class="split-link">Show Information</button></div></div>
+                    <div class="more-card" data-target="one-health-content"><div class="more-icon">⚕️</div><div class="more-card-content"><h3>One Health Approach</h3><p>Discover the integrated, unifying approach that aims to sustainably balance and optimize the health of people, animals, and ecosystems.</p><button class="split-link">Show Information</button></div></div>
+                </div>
+            </div>
+
+            <!-- Hidden Content Section: AI in AMR -->
+            <div class="more-content-container hidden" id="ai-content">
+                <h2 class="section-title">AI in AMR</h2>
+                <div class="about-text">
+                    <p>Artificial Intelligence is a transformative force in the fight against AMR, enabling researchers to process vast datasets and accelerate progress at an unprecedented scale. From drug discovery to personalized medicine, AI is creating powerful new tools to overcome the challenges of resistance.</p>
+                </div>
+                <div class="ai-grid-container">
+                    <div class="ai-card"><h3>Rapid and Accurate Diagnostics</h3><p>AI models analyze clinical and genomic data to quickly identify resistant pathogens, reducing diagnosis times and enabling faster, more effective treatment.</p></div>
+                    <div class="ai-card"><h3>Predicting Resistance Patterns</h3><p>By analyzing large-scale genomic datasets, machine learning can forecast emerging AMR trends, helping public health officials to implement preemptive strategies.</p></div>
+                    <div class="ai-card"><h3>Accelerated Drug Discovery</h3><p>AI algorithms screen vast chemical libraries to identify novel compounds with antibiotic potential, dramatically speeding up the search for new drugs.</p></div>
+                    <div class="ai-card"><h3>Global Surveillance</h3><p>AI platforms integrate worldwide AMR data to monitor the spread of resistance genes and identify hotspots, informing global public health responses.</p></div>
+                    <div class="ai-card"><h3>Personalized Therapies</h3><p>AI can tailor antimicrobial treatments to individual patients by analyzing their specific infection and health data, maximizing efficacy while minimizing resistance risk.</p></div>
+                    <div class="ai-card"><h3>Automated Lab Testing</h3><p>AI-powered robotics can automate antimicrobial susceptibility tests, leading to higher accuracy, greater throughput, and faster results in the lab.</p></div>
+                </div>
+                <h3 class="subsection-title">Further Resources</h3>
+                <div class="research-container">
+                    <div class="research-item"><div class="research-info"><h3>Detecting Antibiotic Resistance with AI: Microbial Minutes</h3><p>Source: American Society for Microbiology</p></div><a href="https://asm.org/videos/detecting-antibiotic-resistance-with-ai-microbial" target="_blank" rel="nofollow noopener" class="research-link">Watch Video</a></div>
+                    <div class="research-item"><div class="research-info"><h3>AI Just Designed New Antibiotics That Kill “Unstoppable” Superbugs</h3><p>Source: YouTube</p></div><a href="https://www.youtube.com/watch?v=ztFdf86LjoE" target="_blank" rel="nofollow noopener" class="research-link">Watch Video</a></div>
+                </div>
+                <button class="back-button">← Back to Topics</button>
+            </div>
+
+            <!-- Hidden Content Section: ESKAPE Pathogens -->
+            <div class="more-content-container hidden" id="eskape-content">
+                <h2 class="section-title">ESKAPE Pathogens</h2>
+                <div class="about-text">
+                    <p>The acronym ESKAPE identifies six bacterial pathogens notorious for their high rates of virulence and antibiotic resistance, including Enterococcus faecium, Staphylococcus aureus, Klebsiella pneumoniae, Acinetobacter baumannii, Pseudomonas aeruginosa, and Enterobacter spp.<sup><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6452778/" target="_blank" rel="nofollow noopener">[1]</a></sup> These microbes are a primary cause of severe hospital-acquired infections worldwide and are known for their ability to "escape" the effects of common antimicrobial drugs. Their multidrug resistance complicates treatment, leading to increased mortality rates and higher healthcare costs.</p>
+                    <p>Due to their critical role in the AMR crisis, the World Health Organization (WHO) features most ESKAPE pathogens on its priority list to guide the research and development of new, effective antibiotics.</p>
+                </div>
+                 <h3 class="subsection-title">Further Resources</h3>
+                <div class="research-container">
+                    <div class="research-item"><div class="research-info"><h3>WHO Priority Antibiotic-Resistant Bacteria List</h3><p>Source: World Health Organization</p></div><a href="https://www.who.int/news/item/17-05-2024-who-updates-list-of-drug-resistant-bacteria-most-threatening-to-human-health" target="_blank" rel="nofollow noopener" class="research-link">View List</a></div>
+                    <div class="research-item"><div class="research-info"><h3>ESKAPE Pathogens and AMR Mechanisms (2024 Review)</h3><p>Source: Nature Reviews Microbiology</p></div><a href="https://www.nature.com/articles/s41579-024-01054-w" target="_blank" rel="nofollow noopener" class="research-link">Read Review</a></div>
+                    <div class="research-item"><div class="research-info"><h3>Comprehensive Review on Resistance in ESKAPE Pathogens</h3><p>Source: NCBI PMC</p></div><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6452778/" target="_blank" rel="nofollow noopener" class="research-link">Read Review</a></div>
+                </div>
+                <button class="back-button">← Back to Topics</button>
+            </div>
+            
+            <div class="more-content-container hidden" id="who-content"><h2 class="section-title">WHO on Antimicrobial Resistance</h2><div class="about-text"><p>The World Health Organization (WHO) defines AMR as the evolution of microorganisms to resist medicines, making infections harder to treat and increasing the risk of disease spread and death. Recognized as a top 10 global public health threat, AMR is primarily driven by the misuse of antimicrobials in humans, animals, and agriculture, undermining the effectiveness of modern medicine.</p><p>To combat this, the WHO's Global Action Plan focuses on five key objectives:</p><ul class="feature-list"><li>Improving awareness and understanding of AMR.</li><li>Strengthening knowledge through surveillance and research.</li><li>Reducing infection incidence through sanitation and hygiene.</li><li>Optimizing the use of antimicrobial medicines.</li><li>Fostering sustainable investment in new tools and treatments.</li></ul><a href="https://www.who.int/news-room/fact-sheets/detail/antimicrobial-resistance?utm" target="_blank" rel="noopener noreferrer" class="cta-button cta-primary" style="margin-top: 30px; display: inline-block;">Learn More from WHO</a></div><button class="back-button">← Back to Topics</button></div>
+            
+            <div class="more-content-container hidden" id="one-health-content"><h2 class="section-title">One Health Approach to AMR</h2><div class="about-text"><p>The One Health approach is a unifying framework that recognizes the deep interconnection between the health of humans, animals, and the environment. It promotes cross-sectoral collaboration to effectively monitor and control the spread of resistant microbes. Since resistance can emerge in any of these domains and transfer to others, a comprehensive strategy is essential.</p><p>This approach supports integrated surveillance systems, policies for responsible antimicrobial use across all sectors, and coordinated research efforts. By addressing AMR holistically, the One Health framework, strongly endorsed by the WHO, is crucial for protecting global health and preserving the efficacy of antimicrobial medicines for the future.</p><a href="https://www.who.int/southeastasia/outbreaks-and-emergencies/health-emergency-information-risk-assessment/antimicrobial-resistance-one-health" target="_blank" rel="noopener noreferrer" class="cta-button cta-primary" style="margin-top: 30px; display: inline-block;">Learn More from WHO</a></div><button class="back-button">← Back to Topics</button></div>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
