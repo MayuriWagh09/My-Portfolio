@@ -31,7 +31,6 @@ if (menuToggle && navLinks) {
 
 document.querySelectorAll('.nav-links a').forEach(link => {
     link.addEventListener('click', (e) => {
-        // Prevent dropdown parent link from navigating on mobile
         if (window.innerWidth <= 768 && link.parentElement.classList.contains('dropdown')) {
             e.preventDefault();
             link.parentElement.classList.toggle('active');
@@ -53,7 +52,6 @@ function highlightCurrentPageLink() {
         const linkPage = link.getAttribute('href').split('/').pop().split('#')[0];
         if (linkPage === currentPage || (currentPage === '' && linkPage === 'index.html')) {
             link.classList.add('active');
-            // If it's a dropdown link, also activate the parent
             if (link.closest('.dropdown-menu')) {
                 link.closest('.dropdown').querySelector('.nav-link').classList.add('active');
             }
@@ -64,6 +62,7 @@ function highlightCurrentPageLink() {
 // Navbar scroll effect
 window.addEventListener('scroll', function() {
     const navbar = document.getElementById('navbar');
+    if (!navbar) return;
     if (window.scrollY > 50) {
         navbar.classList.add('scrolled');
     } else {
@@ -84,16 +83,6 @@ tabs.forEach(tab => {
         document.getElementById(tabId).classList.add('active');
     });
 });
-
-// Form submission
-const contactForm = document.getElementById('contactForm');
-if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        alert('Message sent! We\'ll get back to you soon.');
-        this.reset();
-    });
-}
 
 // Particle creation
 createParticles();
@@ -149,14 +138,13 @@ if (textSets.length > 0) {
 // SCRIPT for Cases & Success Page
 function setupCasesPage() {
     const initialView = document.getElementById('initial-view');
+    if (!initialView) return; 
+
     const caseLinksView = document.getElementById('case-links');
     const successLinksView = document.getElementById('success-links');
-    
     const viewCasesBtn = document.getElementById('view-cases-btn');
     const viewSuccessBtn = document.getElementById('view-success-btn');
     const backButtons = document.querySelectorAll('.back-button');
-
-    if (!initialView) return; 
 
     viewCasesBtn.addEventListener('click', () => {
         initialView.classList.add('hidden');
@@ -180,18 +168,16 @@ function setupCasesPage() {
 // SCRIPT for More Topics Page
 function setupMorePage() {
     const initialView = document.getElementById('more-initial-view');
-    if (!initialView) return; // Exit if not on the "more" page
+    if (!initialView) return;
 
     const cards = document.querySelectorAll('.more-card');
     const contentContainers = document.querySelectorAll('.more-content-container');
     const backButtons = document.querySelectorAll('.back-button');
-    const sectionTitle = document.querySelector('.more-topics .section-title');
 
     cards.forEach(card => {
         card.addEventListener('click', () => {
             const targetId = card.getAttribute('data-target');
             const targetContent = document.getElementById(targetId);
-
             initialView.classList.add('hidden');
             targetContent.classList.remove('hidden');
         });
